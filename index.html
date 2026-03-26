@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>UASD - Presentación Final</title>
+    <style>
+        body, html { 
+            margin: 0; padding: 0; height: 100%; 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: #001a33; overflow: hidden; 
+            display: flex; justify-content: center; align-items: center;
+        }
+        
+        #portada {
+            position: fixed; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #003366 0%, #001a33 100%);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 100; text-align: center; color: white;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .logo-uasd { width: 130px; margin-bottom: 20px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+
+        h1 { font-size: 42px; margin: 10px 20px; font-weight: 800; line-height: 1.2; }
+        p { font-size: 20px; opacity: 0.8; margin-top: 0; }
+
+        /* EL BOTÓN ÚNICO Y GIGANTE */
+        .btn-descarga-final {
+            margin-top: 40px;
+            padding: 25px 70px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            background: #8b3dff; /* Morado Canva */
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(139, 61, 255, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-descarga-final:hover {
+            transform: scale(1.08);
+            background: #00c4cc; /* Cyan Canva */
+            box-shadow: 0 20px 40px rgba(0, 196, 204, 0.5);
+        }
+
+        .btn-descarga-final:active { transform: scale(0.95); }
+
+        /* Pantalla de éxito oculta */
+        .success-screen { color: white; text-align: center; display: none; }
+        
+        .fuera { transform: translateY(-100%); }
+    </style>
+</head>
+<body>
+
+    <div id="portada">
+        <img src="https://logospng.org/download/canva/canva-512.png" alt="UASD" class="logo-uasd">
+        <h1>Lengua EspaÑola Basica 1</h1>
+        <p>Maestro Yanilka Liquel Batista Rivera</p>
+        
+        <button class="btn-descarga-final" onclick="ejecutarAccion()">
+            VER CONTENIDO 
+        </button>
+    </div>
+
+    <div id="mensajeExito" class="success-screen">
+        <h2 style="font-size: 35px; color: #00c4cc;">¡Descarga Exitosa!</h2>
+        <p>El archivo <b>trabajouasd.zip</b> se está guardando en su equipo.</p>
+        <button onclick="location.reload()" style="background:none; border:1px solid white; color:white; padding:10px 20px; border-radius:20px; cursor:pointer; margin-top:20px;">Volver al inicio</button>
+    </div>
+
+    <script>
+        function ejecutarAccion() {
+            // 1. Quitar la portada visualmente
+            const portada = document.getElementById('portada');
+            portada.classList.add('fuera');
+            
+            // 2. Mostrar el mensaje de éxito después de la animación
+            setTimeout(() => {
+                document.getElementById('mensajeExito').style.display = 'block';
+            }, 300);
+
+            // 3. DISPARAR DESCARGA FORZADA
+            const link = document.createElement('a');
+            link.href = 'trabajoEspañol.zip'; // NOMBRE EXACTO DE TU ARCHIVO
+            link.download = 'trabajoEspañol.zip';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            console.log("Descarga de trabajouasd.zip iniciada.");
+        }
+    </script>
+
+</body>
+</html>
